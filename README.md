@@ -1,1 +1,1 @@
-Project for http://hack.bestprague.cz/.
+Project for http://hack.bestprague.cz/
