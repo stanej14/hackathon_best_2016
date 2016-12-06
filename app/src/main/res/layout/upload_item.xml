@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@color/grey_light"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:minHeight="80dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
                 android:paddingTop="8dp">
 
     <TextView
@@ -18,12 +17,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/img_btn_remove"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:singleLine="true"
         android:maxLines="1"
+        android:singleLine="true"
+        android:textAppearance="?android:textAppearanceMedium"
         tools:text="Nazev"/>
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_item_title"
+        android:layout_toLeftOf="@id/img_btn_remove"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textSize="13sp"
+        tools:text="12 MB"/>
 
     <Button
         android:id="@+id/img_btn_remove"
@@ -34,6 +45,6 @@
         android:background="@android:color/transparent"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Zrušit"/>
+        android:text="Odstranit"/>
 
 </RelativeLayout>

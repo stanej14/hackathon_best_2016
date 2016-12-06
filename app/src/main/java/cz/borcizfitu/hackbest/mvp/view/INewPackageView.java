@@ -8,5 +8,5 @@ import cz.borcizfitu.hackbest.mvp.view.base.IShowRetryView;
 
 
 public interface INewPackageView  {
-    void updateFiles(List<String> names);
+    void updateFiles(List<String> names, List<Long> sizes);
 }
