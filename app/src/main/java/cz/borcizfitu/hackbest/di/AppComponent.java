@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import cz.borcizfitu.hackbest.mvp.presenter.LoginPresenter;
 import cz.borcizfitu.hackbest.mvp.presenter.MainPresenter;
+import cz.borcizfitu.hackbest.mvp.presenter.NewPackagePresenter;
 import dagger.Component;
 
 /**
@@ -16,4 +17,6 @@ public interface AppComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(LoginPresenter loginPresenter);
+
+    void inject(NewPackagePresenter newPackagePresenter);
 }

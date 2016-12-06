@@ -1,8 +1,10 @@
 package cz.borcizfitu.hackbest.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,10 +18,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cz.borcizfitu.hackbest.R;
 import cz.borcizfitu.hackbest.domain.model.Item;
 import cz.borcizfitu.hackbest.mvp.presenter.MainPresenter;
 import cz.borcizfitu.hackbest.mvp.view.IMainView;
+import cz.borcizfitu.hackbest.ui.activity.NewPackageActivity;
 import cz.borcizfitu.hackbest.ui.adapter.MergeRecyclerAdapter;
 import cz.borcizfitu.hackbest.ui.adapter.ReceivedAdapter;
 import cz.borcizfitu.hackbest.ui.adapter.SentAdapter;
@@ -38,6 +42,7 @@ public class MainFragment extends BaseRetryNucleusFragment<MainPresenter> implem
 
     @BindView(R.id.recycler_packages)
     RecyclerView mMergeView;
+
     // Create a new merge adapter.
 
     private MergeRecyclerAdapter mergeAdapter;
@@ -100,5 +105,11 @@ public class MainFragment extends BaseRetryNucleusFragment<MainPresenter> implem
     @Override
     public void onDeleteSentPackageClicked(@NonNull String url) {
         getPresenter().removeSentPackage(url);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFABCliakce(){
+        Intent intent = new Intent(getActivity(), NewPackageActivity.class);
+        startActivity(intent, null);
     }
 }
