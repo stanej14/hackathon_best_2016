@@ -9,4 +9,10 @@ import cz.borcizfitu.hackbest.mvp.view.base.IShowRetryView;
 
 public interface INewPackageView  {
     void updateFiles(List<String> names, List<Long> sizes);
+
+    void showProgress();
+
+    void dismissProgressDialog();
+
+    void clearName();
 }

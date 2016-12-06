@@ -15,4 +15,8 @@
     <string name="error_authentication">Not authorized</string>
     <string name="error_general">Error</string>
     <string name="countdown">Zbývá %s dní</string>
+    <string name="cancel">Zrušit</string>
+    <string name="text_wait">Čekejte</string>
+    <string name="upload_success">Zásilka byla nahrána</string>
+    <string name="fill_name">Vyplňte název zásilky</string>
 </resources>

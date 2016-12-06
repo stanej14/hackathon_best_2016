@@ -57,19 +57,18 @@ public class TestFragment extends Fragment {
             }
         });
         btnTestSend.setOnClickListener(v -> {
-            String receiver = "d71rTk9Bq_w:APA91bHY-pODQaZ-nZJjluNZQj1S2K3nXQx-Ouq44zaEs6xA4Q2tE7Wv7nToNqabQnz79A9tXle2NwM3tIcWspnZHJRDnOeervkYkf-hwRrbje54laUXlmmF_Q6MOPdSB17rT1a06qZ3";
+            String receiver = "dpSjOpfSSTE:APA91bErN95xqn6gXidMPoi99erVrEGC2S-VBPw5oIlHf6gYAtzfT0HlGsXK2cggToHdioD7oL2lYvnLHblIPwIyYt3osBx1quvLT_2mgF-xE_B6BJcXlqmly3M-UM62zvhBVR5iO6Sn";
             Observable.just(receiver)
                     .subscribeOn(Schedulers.io())
                     .doOnNext(r -> {
                         try {
-                            JSONObject notification = GcmUtils.createNotification("LOLECEK");
+                            JSONObject notification = GcmUtils.createNotification("Nová zásilka");
                             GcmUtils.sendMessage(notification, r);
                         } catch (Exception e) {
                             Timber.e("", e);
                         }
                     })
-                    .subscribe(s -> {
-                    }, Throwable::printStackTrace);
+                    .subscribe(s -> {}, Throwable::printStackTrace);
         });
     }
 }

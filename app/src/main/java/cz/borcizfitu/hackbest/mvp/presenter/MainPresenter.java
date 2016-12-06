@@ -57,18 +57,15 @@ public class MainPresenter extends BaseRxPresenter<IMainView> {
         super.onCreate(savedState);
         App.getAppComponent().inject(this);
 
-        for (int i = 0; i < 10; i++){
-            Item item = new Item("Name" + i, "" + i, 1482192000, "Pantokrator", 0);
-            spInteractor.storePackage(item);
-        }
-
-        for (int i = 0; i < 10; i++){
-            Item item = new Item("Name" + i, "" + i, 1482192000, "Pantokrator", 1);
-            spInteractor.storePackage(item);
-        }
-
-        ApiInterface.sendFile(Environment.getExternalStorageDirectory() + "/" + "navigator.log.txt",
-                "navigator.log.txt");
+//        for (int i = 0; i < 10; i++){
+//            Item item = new Item("Name" + i, "" + i, 1482192000, "Pantokrator", 0);
+//            spInteractor.storePackage(item);
+//        }
+//
+//        for (int i = 0; i < 10; i++){
+//            Item item = new Item("Name" + i, "" + i, 1482192000, "Pantokrator", 1);
+//            spInteractor.storePackage(item);
+//        }
     }
 
     @Override

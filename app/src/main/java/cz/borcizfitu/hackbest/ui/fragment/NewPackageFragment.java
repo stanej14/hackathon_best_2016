@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import butterknife.OnClick;
 import cz.borcizfitu.hackbest.R;
 import cz.borcizfitu.hackbest.mvp.presenter.NewPackagePresenter;
 import cz.borcizfitu.hackbest.mvp.view.INewPackageView;
+import cz.borcizfitu.hackbest.ui.activity.NewPackageActivity;
 import cz.borcizfitu.hackbest.ui.fragment.base.BaseRetryNucleusFragment;
 import nucleus.factory.RequiresPresenter;
 
@@ -30,12 +34,16 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
     public static final String TAG = NewPackageFragment.class.getName();
     private static final int YOUR_RESULT_CODE = 1;
 
-
+    private final String PROGRESS_ACTIVITY_FRAGMENT = "progressActivityFragment";
+    ProgressDialogFragment dialogFragment;
     @BindView(R.id.name)
     EditText name;
 
     @BindView(R.id.added_items)
     LinearLayout layout;
+
+    @BindView(R.id.send)
+    Button send;
 
     @Nullable
     @Override
@@ -54,7 +62,11 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
 
     @OnClick(R.id.send)
     public void onSendClicked() {
-
+        if(TextUtils.isEmpty(name.getText())){
+            Snackbar.make(getView(), getString(R.string.fill_name), Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        getPresenter().uploadFles();
     }
 
     @Override
@@ -88,6 +100,7 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
                 });
 
                 layout.addView(someLayoutView);
+                send.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -119,6 +132,11 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
                 e.printStackTrace();
             }
         }
+        if(names.size() == 0){
+            send.setVisibility(View.INVISIBLE);
+        } else {
+            send.setVisibility(View.VISIBLE);
+        }
 
         for (int i = 0; i < names.size(); i++) {
             View someLayoutView = LayoutInflater.from(getActivity()).inflate(
@@ -140,5 +158,31 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
 
             layout.addView(someLayoutView);
         }
+    }
+
+    @Override
+    public void showProgress() {
+        showProgressDialog(true);
+    }
+
+    protected void showProgressDialog(boolean isCancelable) {
+        dialogFragment = ProgressDialogFragment.createInstance(isCancelable);
+        dialogFragment.show(((NewPackageActivity)getActivity()).getSupportFragmentManager(),
+                PROGRESS_ACTIVITY_FRAGMENT);
+    }
+
+    public void dismissProgressDialog() {
+        if (dialogFragment != null) {
+            dialogFragment.dismissAllowingStateLoss();
+        }
+
+        if (getView() != null) {
+            Snackbar.make(getView(), getString(R.string.upload_success), Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void clearName() {
+        name.setText("");
     }
 }
