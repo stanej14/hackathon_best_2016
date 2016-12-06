@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1013805140695",
+    "firebase_url": "https://bestprague-dda85.firebaseio.com",
+    "project_id": "bestprague-dda85",
+    "storage_bucket": "bestprague-dda85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013805140695:android:0f7914a1554f14a3",
+        "android_client_info": {
+          "package_name": "cz.borcizfitu.hackbest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013805140695-o0s8p72uh4cr192v6ejos7lv34h5h1ho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cz.borcizfitu.hackbest",
+            "certificate_hash": "7F4612D35F730704EDCCE5215F539B5AC1A8AF91"
+          }
+        },
+        {
+          "client_id": "1013805140695-f3g6pn88dso1048102rtvsj0t7t98ki4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSkkH8C1XtKoNTWJFag7U6e4C6ejh8wQI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013805140695-f3g6pn88dso1048102rtvsj0t7t98ki4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
