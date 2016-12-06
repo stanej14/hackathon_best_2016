@@ -32,9 +32,7 @@ public class LoginFragment extends BaseRetryNucleusFragment<LoginPresenter> impl
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if (!getPresenter().hasAccessToken()) {
-            Auth.startOAuth2Authentication(getActivity(), ApiConfig.APP_KEY);
-        }
+        Auth.startOAuth2Authentication(getActivity(), ApiConfig.APP_KEY);
     }
 
     @Nullable
