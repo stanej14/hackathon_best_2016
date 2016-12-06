@@ -1,8 +1,19 @@
 package cz.borcizfitu.hackbest.mvp.presenter;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.WriteMode;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +22,14 @@ import javax.inject.Inject;
 import cz.borcizfitu.hackbest.App;
 import cz.borcizfitu.hackbest.Constants;
 import cz.borcizfitu.hackbest.RxBus;
+import cz.borcizfitu.hackbest.client.ApiInterface;
+import cz.borcizfitu.hackbest.client.DropboxClientFactory;
 import cz.borcizfitu.hackbest.domain.model.Item;
 import cz.borcizfitu.hackbest.interactor.IApiInteractor;
 import cz.borcizfitu.hackbest.interactor.ISpInteractor;
 import cz.borcizfitu.hackbest.mvp.presenter.base.BaseRxPresenter;
 import cz.borcizfitu.hackbest.mvp.view.IMainView;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -52,6 +66,9 @@ public class MainPresenter extends BaseRxPresenter<IMainView> {
             Item item = new Item("Name" + i, "" + i, 1482192000, "Pantokrator", 1);
             spInteractor.storePackage(item);
         }
+
+        ApiInterface.sendFile(Environment.getExternalStorageDirectory() + "/" + "navigator.log.txt",
+                "navigator.log.txt");
     }
 
     @Override
