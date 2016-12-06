@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="80dp"
+              android:background="@color/grey_light"
+              android:foreground="?android:attr/selectableItemBackground"
+              android:minHeight="80dp"
+              android:paddingBottom="8dp"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/text_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:text="Nazev"/>
+
+    <Button
+        android:id="@+id/img_btn_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zrušit"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:foreground="@android:drawable/list_selector_background"
+        android:background="@android:color/transparent"/>
+
+</RelativeLayout>

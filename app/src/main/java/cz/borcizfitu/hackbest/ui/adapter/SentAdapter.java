@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,24 +16,21 @@ import butterknife.ButterKnife;
 import cz.borcizfitu.hackbest.R;
 import cz.borcizfitu.hackbest.domain.model.Item;
 
-/**
- * RecyclerView adapter for {@link Item}.
- * Created by Jan Stanek[st.honza@gmail.com] on {12.11.16}
- **/
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
+public class SentAdapter extends RecyclerView.Adapter<SentAdapter.ViewHolder> {
 
     private final List<Item> items;
-    private OnItemClickListener itemClickListener;
+    private SentPackageListener mReceivePackageListener;
 
-    public ItemAdapter(@NonNull OnItemClickListener listener) {
+    public SentAdapter(@NonNull SentPackageListener listener) {
         this.items = new ArrayList<>();
-        this.itemClickListener = listener;
+        this.mReceivePackageListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item, parent, false);
-        return new ViewHolder(view, itemClickListener);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sent_item, parent,
+                false);
+        return new ViewHolder(view, mReceivePackageListener);
     }
 
     @Override
@@ -56,6 +54,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     /**
+     * Add item to the adapter.
+     *
+     * @param itemsObject Item.
+     */
+    public void setItems(@NonNull List<Item> itemsObject) {
+        items.clear();
+        items.addAll(itemsObject);
+        notifyDataSetChanged();
+    }
+
+    /**
      * Clear items.
      */
     public void clearItems() {
@@ -66,26 +75,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @NonNull
-        private final OnItemClickListener itemClickListener;
-        @BindView(R.id.text_item_author)
-        TextView textAuthor;
-        @BindView(R.id.text_item_title)
-        TextView textTitle;
+        private final SentPackageListener itemClickListener;
 
-        public ViewHolder(@NonNull View itemView, @NonNull OnItemClickListener listener) {
+        @BindView(R.id.img_btn_remove)
+        Button removeIB;
+        @BindView(R.id.text_item_title)
+        TextView name;
+
+        public ViewHolder(@NonNull View itemView, @NonNull SentPackageListener listener) {
             super(itemView);
             this.itemClickListener = listener;
             ButterKnife.bind(this, itemView);
         }
 
         public void bind(@NonNull Item item) {
-            itemView.setOnClickListener(v -> itemClickListener.onItemClicked(item.getUrl()));
-            textAuthor.setText(item.getAuthor());
-            textTitle.setText(item.getTitle());
+            removeIB.setOnClickListener(v -> itemClickListener.onDeleteSentPackageClicked(item.getUrl()));
+            name.setText(item.getName());
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClicked(@NonNull String url);
+    public interface SentPackageListener {
+        void onDeleteSentPackageClicked(@NonNull String url);
     }
 }
