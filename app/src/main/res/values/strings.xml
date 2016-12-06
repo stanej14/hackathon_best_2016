@@ -14,4 +14,5 @@
     <string name="error_client">Error %d</string>
     <string name="error_authentication">Not authorized</string>
     <string name="error_general">Error</string>
+    <string name="countdown">Zbývá %s dní</string>
 </resources>
