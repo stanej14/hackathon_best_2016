@@ -7,6 +7,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import cz.borcizfitu.hackbest.R;
 import cz.borcizfitu.hackbest.gcm.GcmUtils;
+import cz.borcizfitu.hackbest.ui.fragment.LoginFragment;
 import cz.borcizfitu.hackbest.ui.fragment.MainFragment;
 
 /**
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.lay_main_container, new MainFragment(), MainFragment.TAG)
+                    .replace(R.id.lay_main_container, new MainFragment(), MainFragment.TAG)
                     .commit();
         }
 

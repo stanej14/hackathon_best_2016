@@ -29,6 +29,7 @@ public class SpInteractor implements ISpInteractor {
     public static final String TAG = SpInteractor.class.getName();
     private static final String SP_NAME = "hack_best_preferences";
     private static final String PACKAGES = "packages";
+    private static final String SP_ACCESS_TOKEN = "access_token";
 
     private final SharedPreferences sharedPreferences;
 
@@ -106,5 +107,14 @@ public class SpInteractor implements ISpInteractor {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getAccessToken() {
+        return sharedPreferences.getString(SP_ACCESS_TOKEN, null);
+    }
+
+    @Override
+    public void setAccessToken(String accessToken) {
+        sharedPreferences.edit().putString(SP_ACCESS_TOKEN, accessToken).apply();
     }
 }

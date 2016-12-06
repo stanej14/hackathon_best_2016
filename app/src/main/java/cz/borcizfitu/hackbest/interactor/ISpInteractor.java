@@ -14,4 +14,8 @@ public interface ISpInteractor {
     void storePackage(Item item);
 
     void storePackages(List<Item> packages);
+
+    String getAccessToken();
+
+    void setAccessToken(String accessToken);
 }

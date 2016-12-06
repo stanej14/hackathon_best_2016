@@ -2,6 +2,7 @@ package cz.borcizfitu.hackbest.di;
 
 import javax.inject.Singleton;
 
+import cz.borcizfitu.hackbest.mvp.presenter.LoginPresenter;
 import cz.borcizfitu.hackbest.mvp.presenter.MainPresenter;
 import dagger.Component;
 
@@ -13,4 +14,6 @@ import dagger.Component;
 @Component(modules = {AppModule.class, InteractorsModule.class})
 public interface AppComponent {
     void inject(MainPresenter mainPresenter);
+
+    void inject(LoginPresenter loginPresenter);
 }
