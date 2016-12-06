@@ -21,12 +21,17 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Přidat"/>
-
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Přidat soubor"/>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/added_items"
         android:layout_width="match_parent"
@@ -34,12 +39,17 @@
         android:orientation="vertical">
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Osedlat"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Odeslat soubory"/>
+    </RelativeLayout>
 
 
 </LinearLayout>

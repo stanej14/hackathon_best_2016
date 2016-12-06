@@ -30,6 +30,7 @@ public class NewPackagePresenter extends BaseRxPresenter<INewPackageView> {
     List<String> names = new ArrayList<>();
     List<String> paths = new ArrayList<>();
     List<File> files = new ArrayList<>();
+    List<Long> sizes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -37,10 +38,11 @@ public class NewPackagePresenter extends BaseRxPresenter<INewPackageView> {
         App.getAppComponent().inject(this);
     }
 
-    public void addFile(String fileName, String path, File myFile) {
+    public void addFile(String fileName, String path, File myFile, long size) {
         names.add(fileName);
         paths.add(path);
         files.add(myFile);
+        sizes.add(size);
     }
 
     public void removeFile(String name) {
@@ -49,7 +51,8 @@ public class NewPackagePresenter extends BaseRxPresenter<INewPackageView> {
                 names.remove(i);
                 paths.remove(i);
                 files.remove(i);
-                getView().updateFiles(names);
+                sizes.remove(i);
+                getView().updateFiles(names, sizes);
                 return;
             }
         }

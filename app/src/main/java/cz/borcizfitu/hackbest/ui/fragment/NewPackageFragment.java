@@ -1,22 +1,15 @@
 package cz.borcizfitu.hackbest.ui.fragment;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -26,14 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.borcizfitu.hackbest.R;
-import cz.borcizfitu.hackbest.domain.model.Item;
-import cz.borcizfitu.hackbest.mvp.presenter.MainPresenter;
 import cz.borcizfitu.hackbest.mvp.presenter.NewPackagePresenter;
-import cz.borcizfitu.hackbest.mvp.view.IMainView;
 import cz.borcizfitu.hackbest.mvp.view.INewPackageView;
-import cz.borcizfitu.hackbest.ui.adapter.MergeRecyclerAdapter;
-import cz.borcizfitu.hackbest.ui.adapter.ReceivedAdapter;
-import cz.borcizfitu.hackbest.ui.adapter.SentAdapter;
 import cz.borcizfitu.hackbest.ui.fragment.base.BaseRetryNucleusFragment;
 import nucleus.factory.RequiresPresenter;
 
@@ -77,16 +64,20 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
             if (resultCode == -1) {
                 String fileName;
                 Uri uri = data.getData();
+                File myFile = new File(uri.getPath());
+                long size = getFolderSize(myFile);
                 fileName = uri.getLastPathSegment();
-                File myFile = new File(uri.toString());
                 String path = myFile.getAbsolutePath();
-                getPresenter().addFile(fileName, path, myFile);
+                getPresenter().addFile(fileName, path, myFile, size);
+
 
                 View someLayoutView = LayoutInflater.from(getActivity()).inflate(
-                        R.layout.sent_item, null);
+                        R.layout.upload_item, null);
 
                 TextView name = (TextView) someLayoutView.findViewById(R.id.text_item_title);
                 Button btn = (Button) someLayoutView.findViewById(R.id.img_btn_remove);
+                TextView sizeTV = (TextView) someLayoutView.findViewById(R.id.size);
+                sizeTV.setText(getMB(size));
 
                 name.setText(fileName);
                 btn.setOnClickListener(new View.OnClickListener() {
@@ -101,28 +92,49 @@ public class NewPackageFragment extends BaseRetryNucleusFragment<NewPackagePrese
         }
     }
 
+    public static long getFolderSize(File f) {
+        long size = 0;
+        if (f.isDirectory()) {
+            for (File file : f.listFiles()) {
+                size += getFolderSize(file);
+            }
+        } else {
+            size = f.length();
+        }
+        return size;
+    }
+
+    private String getMB(long size) {
+        long Kb = 1 * 1024;
+        long Mb = Kb * 1024;
+        return size / Mb + " MB";
+    }
+
     @Override
-    public void updateFiles(List<String> names) {
+    public void updateFiles(List<String> names, List<Long> sizes) {
         if (null != layout && layout.getChildCount() > 0) {
             try {
-                layout.removeViews (0, layout.getChildCount());
+                layout.removeViews(0, layout.getChildCount());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        for (String name: names) {
+        for (int i = 0; i < names.size(); i++) {
             View someLayoutView = LayoutInflater.from(getActivity()).inflate(
-                    R.layout.sent_item, null);
+                    R.layout.upload_item, null);
 
             TextView name2 = (TextView) someLayoutView.findViewById(R.id.text_item_title);
             Button btn = (Button) someLayoutView.findViewById(R.id.img_btn_remove);
+            TextView sizeTV = (TextView) someLayoutView.findViewById(R.id.size);
+            sizeTV.setText(getMB(sizes.get(i)));
 
-            name2.setText(name);
+            name2.setText(names.get(i));
+            int finalI = i;
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    getPresenter().removeFile(name);
+                    getPresenter().removeFile(names.get(finalI));
                 }
             });
 
